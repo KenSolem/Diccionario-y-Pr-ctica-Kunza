@@ -1,6 +1,5 @@
 // vocabulary.js - Base de datos del Diccionario Kunza
 const rawVocabulary = [
-  // --- LETRA A ---
     { kunza: "Acha Mitchi", esp: "Gato montés" },
     { kunza: "Ack'abi", esp: "¡Toma!" },
     { kunza: "Ack'cka", esp: "Yo" },
@@ -25,8 +24,6 @@ const rawVocabulary = [
     { kunza: "Aras suchi", esp: "Mil" },
     { kunza: "Atchi", esp: "Negro" },
     { kunza: "Ay'ian", esp: "Nubil, moza" },
-
-// --- LETRA B ---
     { kunza: "Baálatur", esp: "Cavar" },
     { kunza: "Baáscki", esp: "Tal vez" },
     { kunza: "Baásnatur", esp: "Descargar" },
@@ -60,8 +57,6 @@ const rawVocabulary = [
     { kunza: "Bitainatur", esp: "Pellizcar" },
     { kunza: "Bitchacma", esp: "Viajar" },
     { kunza: "Bitis", esp: "Pómulos" },
-
-    // --- LETRA C ---
     { kunza: "Cachi-isyare-cotch", esp: "Aquel" },
     { kunza: "Cahmor", esp: "Luna" },
     { kunza: "Canipas", esp: "A la derecha" },
@@ -70,7 +65,6 @@ const rawVocabulary = [
     { kunza: "Caur", esp: "Cerro, montaña" },
     { kunza: "Cayáhia", esp: "Bueno" },
     { kunza: "Colamar", esp: "Perdices" },
-// --- LETRA CK ---
     { kunza: "Cka'acks", esp: "En frente" },
     { kunza: "Cka patu", esp: "Grandote" },
     { kunza: "Ckaabar", esp: "Traje, vestido" },
@@ -108,7 +102,6 @@ const rawVocabulary = [
     { kunza: "Ckamalecheque", esp: "Murmurador" },
     { kunza: "Ckamuria'muley", esp: "Eclipse de luna" },
     { kunza: "Ckanas", esp: "Goloso" },
-// --- SECCIÓN CK (Continuación y páginas siguientes) ---
     { kunza: "Ckanckapur", esp: "Obeso" },
     { kunza: "Ckanckata", esp: "Acción de asar" },
     { kunza: "Ckanckatur", esp: "Raspar" },
@@ -322,7 +315,6 @@ const rawVocabulary = [
     { kunza: "Cotch", esp: "Aquella" },
     { kunza: "Coyaine", esp: "Contento" },
     { kunza: "Coyo", esp: "Cerebro" },
-// --- SECCIÓN E y H ---
     { kunza: "Entelackia", esp: "Por donde" },
     { kunza: "Entequiá", esp: "Donde" },
     { kunza: "Entpackia", esp: "Para donde" },
@@ -365,7 +357,6 @@ const rawVocabulary = [
     { kunza: "Herck'tur", esp: "Cantar" },
     { kunza: "Hes'tur", esp: "Secar" },
     { kunza: "Heus'tchatur", esp: "Cansarse" },
-// --- SECCIÓN H, I, K, L, M, N, P ---
     { kunza: "Heustur", esp: "Trabajar" },
     { kunza: "Heutur", esp: "Levantarse, volar" },
     { kunza: "Hey'natur", esp: "Moler" },
@@ -407,7 +398,6 @@ const rawVocabulary = [
     { kunza: "Hurma", esp: "Tonto" },
     { kunza: "Hurma'Ckibur", esp: "Tonta" },
     { kunza: "Hutur", esp: "Saliva, escupir" },
-
     { kunza: "I'yauri", esp: "Calzado" },
     { kunza: "Ic-hcai", esp: "Arbusto" },
     { kunza: "Ichicai", esp: "Chico" },
@@ -438,14 +428,12 @@ const rawVocabulary = [
     { kunza: "Itisacka", esp: "Ninguno" },
     { kunza: "Itnatur", esp: "Prenderse" },
     { kunza: "Itquiquiá", esp: "Cuyo" },
-
     { kunza: "Kala", esp: "Amarillo" },
     { kunza: "Kejepe, Ckiptur", esp: "Amar, querer" },
     { kunza: "Kelas", esp: "Cachiyuyo" },
     { kunza: "Khaipe", esp: "Boca" },
     { kunza: "Kritte", esp: "Cama" },
     { kunza: "Khuru", esp: "Viento" },
-
     { kunza: "Laatchir", esp: "Pájaro" },
     { kunza: "Labasatur", esp: "Lamer, besar" },
     { kunza: "Labuntur", esp: "Pastorear" },
@@ -508,7 +496,6 @@ const rawVocabulary = [
     { kunza: "Lulantur", esp: "Sonar" },
     { kunza: "Luncku", esp: "Jorobado" },
     { kunza: "Lupay'natur", esp: "Robar" },
-
     { kunza: "Ma'istur", esp: "Hallar, procurar" },
     { kunza: "Maara", esp: "Cresta" },
     { kunza: "Máckalo", esp: "Tomar" },
@@ -548,7 +535,6 @@ const rawVocabulary = [
     { kunza: "Mutsisma", esp: "Cinco" },
     { kunza: "Mutups", esp: "Norte" },
     { kunza: "Muyackatur", esp: "Envejecer" },
-
     { kunza: "Nanni", esp: "Pierna" },
     { kunza: "Nannickota", esp: "Piernas" },
     { kunza: "Nautchackti", esp: "Pantorrilla" },
@@ -561,7 +547,6 @@ const rawVocabulary = [
     { kunza: "Nuñir", esp: "Pesado" },
     { kunza: "Nutcko", esp: "Sesos" },
     { kunza: "Nútuckur", esp: "Sesos (materia cerebral)" },
-
     { kunza: "Paaicktur", esp: "Remendar" },
     { kunza: "Paatcha", esp: "Tierra (Divinidad)" },
     { kunza: "Pahní", esp: "Hijo" },
@@ -599,7 +584,6 @@ const rawVocabulary = [
     { kunza: "Picka", esp: "Delgada, Dulce" },
     { kunza: "Pickan", esp: "Angosto" },
     { kunza: "Picku", esp: "Pronto" },
-// --- SECCIÓN P (Continuación), S y T ---
     { kunza: "Pilapatur", esp: "Perder" },
     { kunza: "Pilckta", esp: "Borracho, ebrio" },
     { kunza: "Pilhabatur", esp: "Indigestión, empacho" },
@@ -642,7 +626,6 @@ const rawVocabulary = [
     { kunza: "Putchur", esp: "Flor" },
     { kunza: "Puttu", esp: "Cuerno" },
     { kunza: "Pútutor", esp: "Soplar" },
-
     { kunza: "Saarsitur", esp: "Aventar" },
     { kunza: "Sabo", esp: "Saco, costal" },
     { kunza: "Sábur", esp: "Carne" },
@@ -710,7 +693,6 @@ const rawVocabulary = [
     { kunza: "Sutalanau", esp: "Palma de la mano" },
     { kunza: "Sutar", esp: "Picaflor" },
     { kunza: "Suyi", esp: "Mano" },
-
     { kunza: "Tabiltur", esp: "Bajar" },
     { kunza: "Tackantur", esp: "Palmotear" },
     { kunza: "Tackatur", esp: "Esperar" },
@@ -845,12 +827,9 @@ const rawVocabulary = [
     { kunza: "Turi, capu", esp: "Casa, brea" },
     { kunza: "Tussatur", esp: "Desparramar" },
     { kunza: "Tussuntur", esp: "Bailar" },
-
-// --- SECCIÓN V e Y ---
     { kunza: "Váquit", esp: "Abajo" },
     { kunza: "Vilti", esp: "Halcón" },
     { kunza: "Vitti", esp: "Aguila" },
-
     { kunza: "Yaalir", esp: "Joven, mozo" },
     { kunza: "Yabian", esp: "Despacio, lentamente" },
     { kunza: "Yactamari", esp: "Vecino" },
@@ -874,8 +853,6 @@ const rawVocabulary = [
     { kunza: "Yuckisur", esp: "Picana" },
     { kunza: "Yucknan", esp: "Vinchuca" },
     { kunza: "Yulatur", esp: "Ensebar" },
-
-// --- ESPAÑOL / KUNZA: SECCIÓN A, B y C ---
     { kunza: "Canipas", esp: "A la derecha" },
     { kunza: "Capípas", esp: "A la izquierda" },
     { kunza: "Icotchayá", esp: "A la, A los" },
@@ -974,7 +951,6 @@ const rawVocabulary = [
     { kunza: "Yenapatur", esp: "Ayudar" },
     { kunza: "Si'iran", esp: "Ayuno" },
     { kunza: "Selti", esp: "Azul" },
-
     { kunza: "Tússuntur", esp: "Bailar" },
     { kunza: "Tabiltur", esp: "Bajar" },
     { kunza: "Ishou", esp: "Bajo" },
@@ -1000,7 +976,6 @@ const rawVocabulary = [
     { kunza: "Cayáhia", esp: "Bueno" },
     { kunza: "Tuckur", esp: "Buho" },
     { kunza: "Ckonntur", esp: "Buscar" },
-
     { kunza: "Musa, Mussur", esp: "Cabello, pelo" },
     { kunza: "Lacsi", esp: "Cabeza" },
     { kunza: "Tacktacknatur", esp: "Cacarear" },
@@ -1040,7 +1015,6 @@ const rawVocabulary = [
     { kunza: "Tchainar", esp: "Chañar (árbol)" },
     { kunza: "Seri", esp: "Chépica (medicina)" },
     { kunza: "Ckatchir, Coanti", esp: "Chicha de maíz" },
-
     { kunza: "Ichicai", esp: "Chico" },
     { kunza: "Ckubi", esp: "Chinchilla (animal)" },
     { kunza: "Ckutckuti", esp: "Chinchilla (apellido)" },
@@ -1081,7 +1055,6 @@ const rawVocabulary = [
     { kunza: "Coyajne", esp: "Contento" },
     { kunza: "Ckolbacktur", esp: "Contestar, responder" },
     { kunza: "Chenckol", esp: "Contigo" },
-// --- ESPAÑOL / KUNZA: LETRAS C, D, E y F ---
     { kunza: "Ckopal (apellido atacameño 1620)", esp: "Copa (apellido actual)" },
     { kunza: "Ckapnatur", esp: "Coquear, Mascar" },
     { kunza: "Ckoranti (apellido antiguo)", esp: "Corante (apellido actual)" },
@@ -1120,7 +1093,6 @@ const rawVocabulary = [
     { kunza: "Hampitur", esp: "Curar, sanar" },
     { kunza: "Púlucktur", esp: "Cuye, Conejo" },
     { kunza: "Itquiquiá", esp: "Cuyo" },
-
     { kunza: "Ckantur", esp: "Dar" },
     { kunza: "Isa", esp: "De él" },
     { kunza: "Isaya", esp: "De ellos" },
@@ -1145,7 +1117,6 @@ const rawVocabulary = [
     { kunza: "Baásnatur", esp: "Descargar" },
     { kunza: "Luinatur", esp: "Descubrirse" },
     { kunza: "Pot'natur", esp: "Desenterrar, desatar" },
-
     { kunza: "Baltchar", esp: "Desgracia, Malo" },
     { kunza: "Ckorpintur", esp: "Deshojar" },
     { kunza: "Soolptur", esp: "Desnudarse" },
@@ -1184,7 +1155,6 @@ const rawVocabulary = [
     { kunza: "Ckoi'man", esp: "Duende" },
     { kunza: "At'mu", esp: "Dueño, patrón" },
     { kunza: "Ckachi", esp: "Dulce" },
-
     { kunza: "Yockeltur", esp: "Echar" },
     { kunza: "Ckamuria'muley", esp: "Eclipse de luna" },
     { kunza: "Ckap'pin iamuley", esp: "Eclipse solar" },
@@ -1253,7 +1223,6 @@ const rawVocabulary = [
     { kunza: "Tacktur", esp: "Estornudar" },
     { kunza: "Haalar", esp: "Estrella" },
     { kunza: "Tepitur, haytatur", esp: "Exprimir" },
-
     { kunza: "Ckepar", esp: "Faja" },
     { kunza: "Pi'imu", esp: "Falda" },
     { kunza: "Itchansicks, Firo", esp: "Feo" },
@@ -1267,7 +1236,6 @@ const rawVocabulary = [
     { kunza: "Hupay'natur", esp: "Fruncir" },
     { kunza: "Ckelar, Humur", esp: "Fuego, brasa" },
     { kunza: "Tchamma", esp: "Fuerza" },
-// --- ESPAÑOL / KUNZA: LETRAS G, H, I, J, L, LL, M, N y O ---
     { kunza: "Bickular (ave acuática)", esp: "Gallineta" },
     { kunza: "Malckar, Ckomála", esp: "Garganta" },
     { kunza: "Mitchi", esp: "Gato" },
@@ -1286,7 +1254,6 @@ const rawVocabulary = [
     { kunza: "Muray'nir", esp: "Grueso" },
     { kunza: "Tócomar", esp: "Gusano" },
     { kunza: "Ckackuntur", esp: "Gusto" },
-
     { kunza: "Ttanzi", esp: "Haber" },
     { kunza: "Yockontur", esp: "Hablar" },
     { kunza: "Bailitur", esp: "Halagar con los ojos" },
@@ -1329,7 +1296,6 @@ const rawVocabulary = [
     { kunza: "Ttoi'ur", esp: "Humareda" },
     { kunza: "Ttoi'tur", esp: "Humear" },
     { kunza: "Tchurunckutur", esp: "Hurguear" },
-
     { kunza: "Palcktur", esp: "Imitar" },
     { kunza: "Ckatitchauña", esp: "Imposible, dudoso, absurdo" },
     { kunza: "Ho'hónima", esp: "Incendio, desastre, siniestro" },
@@ -1339,7 +1305,6 @@ const rawVocabulary = [
     { kunza: "Ckuecks", esp: "Inútil, nulo, vano" },
     { kunza: "Launatur", esp: "Ir" },
     { kunza: "Ckapípas", esp: "Izquierda" },
-
     { kunza: "Lacktchatur", esp: "Jaqueca, hemicránea" },
     { kunza: "Ckulam", esp: "Jeta, rostro" },
     { kunza: "Luncku", esp: "Jorobado" },
@@ -1347,7 +1312,6 @@ const rawVocabulary = [
     { kunza: "Letchtur", esp: "Jugar, reir" },
     { kunza: "Hui'iuntur, Tolackutur", esp: "Juntar, agrupar" },
     { kunza: "Semann", esp: "Juntos" },
-
     { kunza: "Ckotch", esp: "La" },
     { kunza: "Bestatur", esp: "Ladear" },
     { kunza: "Ckaru", esp: "Lado, costado" },
@@ -1395,7 +1359,6 @@ const rawVocabulary = [
     { kunza: "Cahmor", esp: "Luna" },
     { kunza: "Tiu'nur", esp: "Lunar" },
     { kunza: "Lalcktchir", esp: "Luz" },
-
     { kunza: "Ttari", esp: "Macho" },
     { kunza: "Pat'ta", esp: "Madre" },
     { kunza: "Ckustur", esp: "Madurar" },
@@ -1452,7 +1415,6 @@ const rawVocabulary = [
     { kunza: "Tchinchebala", esp: "Murciélago" },
     { kunza: "Ckamalecheque", esp: "Murmurador" },
     { kunza: "Cke", esp: "Muy" },
-
     { kunza: "Lickana", esp: "Nación" },
     { kunza: "Sintcha", esp: "Nada" },
     { kunza: "Atchi", esp: "Negro" },
@@ -1474,7 +1436,6 @@ const rawVocabulary = [
     { kunza: "Téckara", esp: "Nueve" },
     { kunza: "Ckari", esp: "Nuevo, verde" },
     { kunza: "Ckeleutch, Auña", esp: "Nunca" },
-
     { kunza: "Ckanckapur", esp: "Obeso" },
     { kunza: "Hamckusatur", esp: "Obsequiar" },
     { kunza: "Ckapinatin", esp: "Ocaso" },
@@ -1498,7 +1459,6 @@ const rawVocabulary = [
     { kunza: "Tchari", esp: "Overo" },
     { kunza: "Lucklantur", esp: "Ovillar" },
     { kunza: "Lucklan", esp: "Ovillo" },
-// --- ESPAÑOL / KUNZA: LETRAS P, Q, R, S, T, U, V, Y y Z ---
     { kunza: "Pabisa", esp: "Pábilo" },
     { kunza: "Tasckmatur", esp: "Padecer" },
     { kunza: "Tickan", esp: "Padre" },
@@ -1537,7 +1497,6 @@ const rawVocabulary = [
     { kunza: "Pilapatur", esp: "Perder" },
     { kunza: "Ckolan", esp: "Perdiz" },
     { kunza: "Ack'ckatchar", esp: "Perezoso, holgazán" },
-
     { kunza: "Lockma", esp: "Perro" },
     { kunza: "Mocke'yatur", esp: "Pesadilla" },
     { kunza: "Nuñir", esp: "Pesado" },
@@ -1584,7 +1543,6 @@ const rawVocabulary = [
     { kunza: "Mitchi", esp: "Puma, gato" },
     { kunza: "Ckapa", esp: "Puño" },
     { kunza: "Ckepininai", esp: "Pupila" },
-
     { kunza: "Ircku", esp: "Qué" },
     { kunza: "Ckoratur", esp: "Quebrar" },
     { kunza: "Honatur", esp: "Quemar" },
@@ -1595,7 +1553,6 @@ const rawVocabulary = [
     { kunza: "Holor", esp: "Quinoa" },
     { kunza: "Sulatur", esp: "Quitar" },
     { kunza: "Hhati", esp: "Quizás" },
-
     { kunza: "Peckai", esp: "Rabo" },
     { kunza: "Tolva", esp: "Racimo" },
     { kunza: "Ckapar", esp: "Raíz" },
@@ -1634,7 +1591,6 @@ const rawVocabulary = [
     { kunza: "Ckabar", esp: "Ropa" },
     { kunza: "Ppanti", esp: "Rosado" },
     { kunza: "Ckui'icutur", esp: "Rueda del huso de hilar" },
-
     { kunza: "Ckackchi", esp: "Sabor" },
     { kunza: "Ckacknatur", esp: "Saborear" },
     { kunza: "Ckeptur", esp: "Sacar" },
@@ -1673,7 +1629,6 @@ const rawVocabulary = [
     { kunza: "Ckeli", esp: "Silla de montar" },
     { kunza: "Passir", esp: "Sin pie" },
     { kunza: "Ho'hónima", esp: "Siniestro" },
-
     { kunza: "Matackai", esp: "Sobaco" },
     { kunza: "Ckaputur", esp: "Sobar" },
     { kunza: "Tchuse", esp: "Sobre cama" },
@@ -1697,7 +1652,6 @@ const rawVocabulary = [
     { kunza: "Hebiutur", esp: "Suspirar" },
     { kunza: "Hebíuma", esp: "Suspiro" },
     { kunza: "Ckits", esp: "Suyo" },
-
     { kunza: "Hónanar", esp: "Tábano" },
     { kunza: "Baánscki", esp: "Tal vez" },
     { kunza: "Ckaí'yi", esp: "Talón del pie" },
@@ -1733,7 +1687,6 @@ const rawVocabulary = [
     { kunza: "Hurma", esp: "Tonto" },
     { kunza: "Ckoli", esp: "Tórax" },
     { kunza: "Tchinckonau", esp: "Torbellino" },
-
     { kunza: "Besti", esp: "Torcido" },
     { kunza: "Sirantur", esp: "Tostar" },
     { kunza: "Heustur", esp: "Trabajar" },
@@ -1758,7 +1711,6 @@ const rawVocabulary = [
     { kunza: "Tchensaya", esp: "Tuyo" },
     { kunza: "Tchensaya'ckota", esp: "Tuyos" },
     { kunza: "Tchema", esp: "Tú, vos, usted" },
-
     { kunza: "Pibur", esp: "Ubre, mamas" },
     { kunza: "Sema'ckibur", esp: "Una" },
     { kunza: "Semanti'sema", esp: "Una vez" },
@@ -1769,7 +1721,6 @@ const rawVocabulary = [
     { kunza: "Ckenn", esp: "Uña" },
     { kunza: "Temnatur", esp: "Urdir" },
     { kunza: "Ckemptur", esp: "Usar" },
-
     { kunza: "Sockersema", esp: "Vara" },
     { kunza: "Tchintur", esp: "Varilla" },
     { kunza: "Helis", esp: "Vasija" },
@@ -1804,11 +1755,9 @@ const rawVocabulary = [
     { kunza: "Ckoi", esp: "Voz" },
     { kunza: "Chinsaya", esp: "Vuestro" },
     { kunza: "Típalo", esp: "Vulva" },
-
     { kunza: "Ckalanna", esp: "Yema" },
     { kunza: "Ack'cka", esp: "Yo" },
     { kunza: "Ack'cka'ya", esp: "Yo soy" },
-
     { kunza: "Ckatchacktur", esp: "Zafarse" },
     { kunza: "Chucken", esp: "Zancudo" },
     { kunza: "Lau'tchur", esp: "Zapallo" },
