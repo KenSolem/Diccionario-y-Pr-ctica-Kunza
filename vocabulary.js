@@ -598,7 +598,7 @@ const rawVocabulary = [
     { kunza: "Píimu", esp: "Falda" },
     { kunza: "Picka", esp: "Delgada, Dulce" },
     { kunza: "Pickan", esp: "Angosto" },
-    { kunza: "Picku", esp: "Pronto" }
+    { kunza: "Picku", esp: "Pronto" },
 // --- SECCIÓN P (Continuación), S y T ---
     { kunza: "Pilapatur", esp: "Perder" },
     { kunza: "Pilckta", esp: "Borracho, ebrio" },
@@ -844,7 +844,7 @@ const rawVocabulary = [
     { kunza: "Turicka", esp: "Rancho" },
     { kunza: "Turi, capu", esp: "Casa, brea" },
     { kunza: "Tussatur", esp: "Desparramar" },
-    { kunza: "Tussuntur", esp: "Bailar" }
+    { kunza: "Tussuntur", esp: "Bailar" },
 
 // --- SECCIÓN V e Y ---
     { kunza: "Váquit", esp: "Abajo" },
@@ -873,7 +873,7 @@ const rawVocabulary = [
     { kunza: "Yotto", esp: "Barro" },
     { kunza: "Yuckisur", esp: "Picana" },
     { kunza: "Yucknan", esp: "Vinchuca" },
-    { kunza: "Yulatur", esp: "Ensebar" }
+    { kunza: "Yulatur", esp: "Ensebar" },
 
 // --- ESPAÑOL / KUNZA: SECCIÓN A, B y C ---
     { kunza: "Canipas", esp: "A la derecha" },
@@ -1497,7 +1497,7 @@ const rawVocabulary = [
     { kunza: "Itcha", esp: "Otro" },
     { kunza: "Tchari", esp: "Overo" },
     { kunza: "Lucklantur", esp: "Ovillar" },
-    { kunza: "Lucklan", esp: "Ovillo" }
+    { kunza: "Lucklan", esp: "Ovillo" },
 // --- ESPAÑOL / KUNZA: LETRAS P, Q, R, S, T, U, V, Y y Z ---
     { kunza: "Pabisa", esp: "Pábilo" },
     { kunza: "Tasckmatur", esp: "Padecer" },
