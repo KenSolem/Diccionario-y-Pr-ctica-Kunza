@@ -39,4 +39,4 @@ Si deseas clonar o ejecutar el proyecto de manera local en tu computador:
 
 1. Clona este repositorio:
    ```bash
-   git clone [https://github.com/tu-usuario/nombre-del-repositorio.git](https://github.com/tu-usuario/nombre-del-repositorio.git)
+   git clone https://github.com/KenSolem/Diccionario-y-Pr-ctica-Kunza.git
