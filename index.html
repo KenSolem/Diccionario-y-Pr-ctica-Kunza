@@ -88,7 +88,6 @@
             display: block;
         }
 
-        /* Filtros de Categoría */
         .category-filters {
             display: flex;
             gap: 0.5rem;
@@ -151,7 +150,6 @@
             color: var(--text-secondary);
         }
 
-        /* Traductor Interactivo Styles */
         .translator-box {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -253,16 +251,18 @@
         <!-- SECCIÓN TRADUCTOR INTERACTIVO -->
         <div id="translator" class="section-card">
             <h2>Traductor de Términos y Oraciones</h2>
-            <p style="color: var(--text-secondary);">Escribe una palabra o busca equivalencias directas en la base de datos:</p>
+            <p style="color: var(--text-secondary);">Escribe una oración en español. Las palabras encontradas se traducirán a kunza y las que no (como nombres propios) se mantendrán:</p>
             
             <div class="translator-box">
                 <div class="translator-pane">
-                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Español / Kunza de entrada:</label>
-                    <textarea id="translateInput" placeholder="Escribe aquí para traducir..." onkeyup="processTranslation()"></textarea>
+                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Oración en Español:</label>
+                    <textarea id="translateInput" placeholder="Ej: hola mi nombre es gonzalo lemus y tengo un zorro en mi rancho..."></textarea>
+                    
+                    <button class="nav-btn active" style="margin-top: 1rem; width: 100%; text-align: center;" onclick="translateSentence()">Traducir Oración</button>
                 </div>
                 <div class="translator-pane">
-                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Resultado en la base de datos:</label>
-                    <div id="translateOutput" class="output-box">Los resultados aparecerán aquí...</div>
+                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Traducción Aproximada (Kunza / Base de Datos):</label>
+                    <div id="translateOutput" class="output-box" style="font-weight: 500;">La traducción aparecerá aquí...</div>
                 </div>
             </div>
         </div>
@@ -270,53 +270,19 @@
         <!-- SECCIÓN ACERCA DE -->
         <div id="about" class="section-card">
             <h2>Patrimonio y Comunidad</h2>
-            <p>Plataforma educativa basada en el registro de la lengua <em>lickan antai</em> recopilada por Julio Vilte Vilte. Diseñado con total respeto por los pueblos originarios y con vocación de libre acceso territorial.</p>
+            <p>Plataforma educativa basada en el registro de la lengua <em>lickan antai</em> recopilada por Julio Vilte Vilte[cite: 3]. Diseñado con total respeto por los pueblos originarios y con vocación de libre acceso territorial.</p>
         </div>
     </div>
 
     <footer>
         <p>Observatorio y Rescate Lingüístico Atacameño — Acceso Libre y Educativo.</p>
-    </h1>
+    </footer>
 
-    <!-- Conexión al archivo de datos externo -->
+    <!-- ORDEN CORRECTO DE LOS SCRIPTS: PRIMERO LOS DATOS, LUEGO LA LÓGICA -->
     <script src="vocabulary.js"></script>
     <script>
         let currentCategory = 'all';
         let activeQuizData = null;
-
-        // Traductor de oraciones palabra por palabra respetando nombres propios
-        function translateSentence() {
-            const rawText = document.getElementById('translateInput').value.trim();
-            const output = document.getElementById('translateOutput');
-            
-            if(!rawText) {
-                output.innerText = "Por favor escribe una oración...";
-                return;
-            }
-
-            // Limpiar y separar la oración en palabras individuales manteniendo signos básicos si los hay
-            const words = rawText.toLowerCase().split(/\s+/);
-            
-            let translatedWords = words.map(word => {
-                // Limpiar puntuación simple si la hubiera
-                const cleanWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
-                
-                if (!cleanWord) return word;
-
-                // Buscar coincidencia exacta o parcial en el diccionario (en español -> kunza)
-                const match = vocabulary.find(item => item.esp.toLowerCase().includes(cleanWord));
-                
-                if (match) {
-                    // Si encuentra la palabra, devuelve el término en kunza destacado
-                    return `<span style="color: var(--accent-color); font-weight: 600;" title="Traducido: ${match.esp}">${match.kunza}</span>`;
-                } else {
-                    // Si no lo encuentra (ej: nombres propios como 'gonzalo', 'lemus'), lo deja igual en español
-                    return `<span style="color: var(--text-primary); opacity: 0.8;" title="Palabra mantenida">${word}</span>`;
-                }
-            });
-
-            output.innerHTML = translatedWords.join(' ');
-        }
 
         function switchTab(tabId) {
             document.querySelectorAll('.section-card').forEach(card => card.classList.remove('active'));
@@ -326,7 +292,6 @@
             if(tabId === 'dict') renderVocabulary(vocabulary);
         }
 
-        // Renderizado del Diccionario
         function renderVocabulary(data) {
             const grid = document.getElementById('vocabGrid');
             grid.innerHTML = '';
@@ -361,7 +326,6 @@
             filterVocabulary();
         }
 
-        // Generador Dinámico de Prácticas (Quiz por Categoría)
         function startQuiz(cat) {
             const pool = cat === 'all' ? vocabulary : vocabulary.filter(i => i.cat === cat);
             if(pool.length < 4) {
@@ -373,7 +337,6 @@
 
         function generateQuizQuestion(pool) {
             const correctItem = pool[Math.floor(Math.random() * pool.length)];
-            // Obtener 3 distractores aleatorios
             let distractors = pool.filter(i => i.kunza !== correctItem.kunza);
             distractors = distractors.sort(() => 0.5 - Math.random()).slice(0, 3);
             
@@ -415,25 +378,34 @@
             if(activeQuizData) generateQuizQuestion(activeQuizData);
         }
 
-        <!-- SECCIÓN TRADUCTOR INTERACTIVO -->
-        <div id="translator" class="section-card">
-            <h2>Traductor de Términos y Oraciones</h2>
-            <p style="color: var(--text-secondary);">Escribe una oración en español. Las palabras encontradas se traducirán a kunza y las que no (como nombres propios) se mantendrán:</p>
+        // Traductor de oraciones palabra por palabra respetando nombres propios
+        function translateSentence() {
+            const rawText = document.getElementById('translateInput').value.trim();
+            const output = document.getElementById('translateOutput');
             
-            <div class="translator-box">
-                <div class="translator-pane">
-                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Oración en Español:</label>
-                    <textarea id="translateInput" placeholder="Ej: hola mi nombre es gonzalo lemus y tengo un zorro en mi rancho..."></textarea>
-                    
-                    <!-- Botón para traducir añadido -->
-                    <button class="nav-btn active" style="margin-top: 1rem; width: 100%; text-align: center;" onclick="translateSentence()">Traducir Oración</button>
-                </div>
-                <div class="translator-pane">
-                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Traducción Aproximada (Kunza / Base de Datos):</label>
-                    <div id="translateOutput" class="output-box" style="font-weight: 500;">La traducción aparecerá aquí...</div>
-                </div>
-            </div>
-        </div>
+            if(!rawText) {
+                output.innerText = "Por favor escribe una oración...";
+                return;
+            }
+
+            const words = rawText.split(/\s+/);
+            
+            let translatedWords = words.map(word => {
+                const cleanWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").toLowerCase();
+                
+                if (!cleanWord) return word;
+
+                // Buscar coincidencia en la base de datos (vocabulary)
+                const match = vocabulary.find(item => item.esp.toLowerCase().includes(cleanWord) || item.kunza.toLowerCase().includes(cleanWord));
+                
+                if (match) {
+                    return `<span style="color: var(--accent-color); font-weight: 600;" title="Traducción: ${match.kunza} ⇄ ${match.esp}">${match.kunza}</span>`;
+                } else {
+                    return `<span style="color: var(--text-primary); opacity: 0.8;" title="Mantenido en texto original">${word}</span>`;
+                }
+            });
+
+            output.innerHTML = translatedWords.join(' ');
         }
 
         window.onload = function() {
