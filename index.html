@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diccionario y Práctica Kunza - Lickan Antai</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent-color: #0f766e; /* Tono institucional / desierto profundo */
+            --accent-hover: #115e59;
+            --border-color: #e2e8f0;
+            --highlight-bg: #f1f5f9;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+        }
+
+        header p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: none;
+        }
+
+        .section-card.active {
+            display: block;
+        }
+
+        /* Diccionario Styles */
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            box-sizing: border-box;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .vocab-item {
+            background-color: var(--highlight-bg);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .vocab-item h3 {
+            margin: 0 0 0.25rem 0;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        .vocab-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Practice / Duolingo Styles */
+        .quiz-container h3 {
+            margin-top: 0;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .option-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: background-color 0.2s;
+        }
+
+        .option-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .option-btn.correct {
+            background-color: #d1fae5;
+            border-color: #10b981;
+            color: #065f46;
+        }
+
+        .option-btn.incorrect {
+            background-color: #fee2e2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .feedback {
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Diccionario y Práctica Kunza</h1>
+        <p>Plataforma de rescate y difusión de la lengua del pueblo Lickan Antai</p>
+    </header>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('dict')">Diccionario Base</button>
+            <button class="nav-btn" onclick="switchTab('practice')">Práctica Interactiva</button>
+            <button class="nav-btn" onclick="switchTab('about')">Sobre el Proyecto</button>
+        </div>
+
+        <!-- SECCIÓN DICCIONARIO -->
+        <div id="dict" class="section-card active">
+            <h2>Repertorio Léxico (Kunza - Español)</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Busca términos rescatados de la tradición oral y toponimia atacameña[cite: 3, 18].</p>
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar palabra en kunza o español..." onkeyup="filterVocabulary()">
+            
+            <div id="vocabGrid" class="vocab-grid">
+                <!-- Se llena mediante JavaScript -->
+            </div>
+        </div>
+
+        <!-- SECCIÓN PRÁCTICA -->
+        <div id="practice" class="section-card">
+            <div class="quiz-container">
+                <h2>Módulo de Práctica Estilo Duolingo</h2>
+                <p id="questionCount" style="color: var(--text-secondary);">Pregunta 1 de 4</p>
+                <h3 id="quizQuestion" style="margin-top: 1rem; font-size: 1.25rem;">¿Qué significa el término kunza...</h3>
+                <div id="quizOptions" class="options-grid">
+                    <!-- Opciones dinámicas -->
+                </div>
+                <div id="quizFeedback" class="feedback"></div>
+                <button id="nextBtn" class="nav-btn active" style="margin-top: 1rem; display: none;" onclick="nextQuestion()">Siguiente Pregunta</button>
+            </div>
+        </div>
+
+        <!-- SECCIÓN ACERCA DE -->
+        <div id="about" class="section-card">
+            <h2>Patrimonio y Comunidad</h2>
+            <p>Este prototipo web busca poner en valor las raíces de los antiguos pobladores *lickan antai*. Basado en el registro documental de investigadores como Julio Vilte Vilte[cite: 3], este espacio digital está preparado para crecer.</p>
+            <p><strong>Nota desde Peine:</strong> En una siguiente etapa, gracias al vínculo con la comunidad local y la memoria oral presente en el territorio, se podrán incorporar notas fonéticas rigurosas validadas directamente con comuneros que conservan el legado de los ancestros.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Observatorio y Rescate Lingüístico Atacameño — Diseñado para el norte de Chile.</p>
+    </footer>
+
+    <script>
+        // Base de datos inicial basada en registros históricos y recopilación de Julio Vilte Vilte[cite: 3]
+        const vocabulary = [
+            { kunza: "Puri", esp: "Agua", cat: "Elemento" },
+            { kunza: "Lari", esp: "Rojo / Sangre", cat: "Color / Naturaleza" },
+            { kunza: "Atchi", esp: "Negro / Oscuro", cat: "Color" },
+            { kunza: "Laratchi", esp: "Rojinegro (Proceso sagrado)", cat: "Cosmovisión" },
+            { kunza: "Ckaichi", esp: "Piedra / Peña", cat: "Territorio" },
+            { kunza: "Ckhúri", esp: "Viento (Gran Espíritu)", cat: "Espiritualidad" },
+            { kunza: "Lickan", esp: "Pueblo / Ciudad", cat: "Sociedad" },
+            { kunza: "Paatcha", esp: "Tierra (Divinidad)", cat: "Cosmovisión" },
+            { kunza: "Toconao", esp: "Rincón perdido", cat: "Toponimia" },
+            { kunza: "Ckapin", esp: "Sol", cat: "Naturaleza" },
+            { kunza: "Cahmor", esp: "Luna", cat: "Naturaleza" },
+            { kunza: "Yalí", esp: "Algarrobo", cat: "Flora" }
+        ];
+
+        // Preguntas para el módulo de práctica
+        const quizData = [
+            {
+                question: "¿Qué significa el término toponímico 'Toconao' en lengua kunza?",
+                options: ["Lugar amarillento", "Rincón perdido", "Agua caliente", "Piedra blanca"],
+                answer: 1
+            },
+            {
+                question: "En la cosmovisión atacameña, ¿a qué elemento o deidad se le atribuye el nombre 'Ckhúri'?",
+                options: ["Al Sol", "Al Volcán Licancabur", "Al Viento (Gran Espíritu)", "A la Tierra Madre"],
+                answer: 2
+            },
+            {
+                question: "¿Cuál es el significado del término 'Puri'?",
+                options: ["Agua", "Fuego", "Cerro", "Semilla"],
+                answer: 0
+            },
+            {
+                question: "¿Qué representa el concepto 'Laratchi'?",
+                options: ["Una tormenta en la cordillera", "El proceso rojinegro / tregua sagrada", "El agua de la acequia", "La cosecha de quinoa"],
+                answer: 1
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let score = 0;
+
+        // Cambiar pestañas
+        function switchTab(tabId) {
+            document.querySelectorAll('.section-card').forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Renderizar Diccionario
+        function renderVocabulary(data) {
+            const grid = document.getElementById('vocabGrid');
+            grid.innerHTML = '';
+            if(data.length === 0) {
+                grid.innerHTML = '<p style="color: var(--text-secondary);">No se encontraron resultados.</p>';
+                return;
+            }
+            data.forEach(item => {
+                grid.innerHTML += `
+                    <div class="vocab-item">
+                        <h3>${item.kunza}</h3>
+                        <p><strong>Español:</strong> ${item.esp}</p>
+                        <p><strong>Categoría:</strong> ${item.cat}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Filtrar Diccionario
+        function filterVocabulary() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = vocabulary.filter(item => 
+                item.kunza.toLowerCase().includes(query) || item.esp.toLowerCase().includes(query)
+            );
+            renderVocabulary(filtered);
+        }
+
+        // Cargar Pregunta del Quiz
+        function loadQuiz() {
+            const q = quizData[currentQuizIndex];
+            document.getElementById('questionCount').innerText = `Pregunta ${currentQuizIndex + 1} de ${quizData.length}`;
+            document.getElementById('quizQuestion').innerText = q.question;
+            const optionsGrid = document.getElementById('quizOptions');
+            optionsGrid.innerHTML = '';
+            document.getElementById('quizFeedback').innerText = '';
+            document.getElementById('nextBtn').style.display = 'none';
+
+            q.options.forEach((opt, index) => {
+                optionsGrid.innerHTML += `<button class="option-btn" onclick="selectOption(${index})">${opt}</button>`;
+            });
+        }
+
+        // Seleccionar Opción
+        function selectOption(selectedIndex) {
+            const q = quizData[currentQuizIndex];
+            const buttons = document.querySelectorAll('.option-btn');
+            
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if(idx === q.answer) {
+                    btn.classList.add('correct');
+                } else if(idx === selectedIndex) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            const feedback = document.getElementById('quizFeedback');
+            if(selectedIndex === q.answer) {
+                feedback.innerText = "¡Correcto! Buen trabajo.";
+                feedback.style.color = "#059669";
+            } else {
+                feedback.innerText = "Incorrecto. La respuesta correcta está marcada en verde.";
+                feedback.style.color = "#dc2626";
+            }
+
+            if(currentQuizIndex < quizData.length - 1) {
+                document.getElementById('nextBtn').style.display = 'inline-block';
+            } else {
+                document.getElementById('nextBtn').style.display = 'none';
+                feedback.innerText += " ¡Has completado esta ronda de práctica!";
+            }
+        }
+
+        // Siguiente Pregunta
+        function nextQuestion() {
+            currentQuizIndex++;
+            loadQuiz();
+        }
+
+        // Inicialización
+        window.onload = function() {
+            renderVocabulary(vocabulary);
+            loadQuiz();
+        };
+    </script>
+</body>
+</html>
