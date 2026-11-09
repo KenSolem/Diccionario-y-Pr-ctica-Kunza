@@ -321,7 +321,7 @@ const rawVocabulary = [
     { kunza: "Colc'tur", esp: "Caer" },
     { kunza: "Cotch", esp: "Aquella" },
     { kunza: "Coyaine", esp: "Contento" },
-    { kunza: "Coyo", esp: "Cerebro" }
+    { kunza: "Coyo", esp: "Cerebro" },
 // --- SECCIÓN E y H ---
     { kunza: "Entelackia", esp: "Por donde" },
     { kunza: "Entequiá", esp: "Donde" },
