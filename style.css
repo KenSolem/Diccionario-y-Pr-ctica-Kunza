@@ -1100,3 +1100,424 @@ body {
         right: 16px;
     }
 }
+
+
+/* =========================================================
+   Módulo de Juegos Didácticos (Memorice, Sopa, Wordle)
+   ========================================================= */
+
+.game-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.game-tab-btn {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.8rem 0.9rem;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    transition: all 0.15s ease;
+    color: var(--text);
+}
+
+.game-tab-btn:hover {
+    border-color: var(--accent);
+}
+
+.game-tab-btn.active {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.game-tab-btn .g-title {
+    font-weight: 700;
+    font-size: 0.98rem;
+}
+
+.game-tab-btn .g-age {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.game-panel[hidden] {
+    display: none;
+}
+
+.game-controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.game-right-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.game-select {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.45rem 0.7rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.game-stats-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.game-win-banner {
+    margin-top: 1.25rem;
+    padding: 1.15rem;
+    border-radius: var(--radius-sm);
+    background: var(--secondary-soft);
+    border: 1px solid var(--secondary);
+    text-align: center;
+}
+
+.game-win-banner h3 {
+    margin: 0 0 0.3rem;
+    color: var(--secondary);
+}
+
+.game-win-banner p {
+    margin: 0 0 0.85rem;
+    font-size: 0.92rem;
+}
+
+/* Memorice */
+.mem-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.mem-card {
+    perspective: 900px;
+    height: 118px;
+    cursor: pointer;
+}
+
+.mem-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mem-card.flipped .mem-card-inner,
+.mem-card.matched .mem-card-inner {
+    transform: rotateY(180deg);
+}
+
+.mem-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.mem-back {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+    color: #FFFFFF;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.mem-front {
+    transform: rotateY(180deg);
+    background: var(--surface-alt);
+    color: var(--text);
+}
+
+.mem-card.matched .mem-front {
+    border-color: var(--secondary);
+    background: var(--secondary-soft);
+}
+
+.mem-visual {
+    font-size: 1.9rem;
+    line-height: 1.1;
+    margin-bottom: 0.2rem;
+}
+
+.mem-color-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    margin-bottom: 0.25rem;
+}
+
+.mem-word-kunza {
+    font-weight: 800;
+    color: var(--accent);
+    font-size: 0.98rem;
+    word-break: break-word;
+}
+
+.mem-word-esp {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.mem-type-badge {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+    letter-spacing: 0.05em;
+}
+
+/* Sopa de Letras */
+.ws-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.ws-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 4px;
+    user-select: none;
+    touch-action: none;
+    max-width: 440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ws-cell {
+    aspect-ratio: 1;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.ws-cell.selecting {
+    background: var(--accent);
+    color: #FFFFFF;
+    border-color: var(--accent);
+}
+
+.ws-cell.found {
+    background: var(--secondary-soft);
+    color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.ws-cell.hinted {
+    box-shadow: 0 0 0 2px var(--star);
+    background: rgba(212, 155, 39, 0.25);
+}
+
+.ws-sidebar {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+}
+
+.ws-sidebar h4 {
+    margin: 0 0 0.65rem;
+    font-size: 0.9rem;
+}
+
+.ws-clue-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.ws-clue-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.ws-clue-item.found {
+    text-decoration: line-through;
+    color: var(--secondary);
+    border-color: var(--secondary);
+    background: var(--secondary-soft);
+}
+
+/* Wordle Kunza */
+.wd-hint-text {
+    background: var(--surface-alt);
+    border-left: 3px solid var(--star);
+    padding: 0.55rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin: 0 0 1rem;
+}
+
+.wd-board {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 6px;
+    max-width: 310px;
+    margin: 0.5rem auto 1rem;
+}
+
+.wd-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+}
+
+.wd-tile {
+    aspect-ratio: 1;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.wd-tile.filled {
+    border-color: var(--text-muted);
+}
+
+.wd-tile.correct {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: #FFFFFF;
+}
+
+.wd-tile.present {
+    background: var(--star);
+    border-color: var(--star);
+    color: #FFFFFF;
+}
+
+.wd-tile.absent {
+    background: var(--text-muted);
+    border-color: var(--text-muted);
+    color: #FFFFFF;
+}
+
+.wd-status {
+    text-align: center;
+    font-weight: 700;
+    min-height: 1.5rem;
+    margin-bottom: 0.85rem;
+    font-size: 0.95rem;
+}
+
+.wd-keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.wd-kb-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+
+.wd-key {
+    flex: 1;
+    max-width: 42px;
+    height: 42px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface-alt);
+    color: var(--text);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wd-key.wide {
+    flex: 1.6;
+    max-width: 72px;
+    font-size: 0.78rem;
+}
+
+.wd-key.correct {
+    background: var(--secondary);
+    color: #FFFFFF;
+    border-color: var(--secondary);
+}
+
+.wd-key.present {
+    background: var(--star);
+    color: #FFFFFF;
+    border-color: var(--star);
+}
+
+.wd-key.absent {
+    background: var(--text-muted);
+    color: #FFFFFF;
+    border-color: var(--text-muted);
+    opacity: 0.65;
+}
+
+@media (max-width: 768px) {
+    .game-selector {
+        grid-template-columns: 1fr;
+    }
+    .mem-board {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .ws-layout {
+        grid-template-columns: 1fr;
+    }
+}
