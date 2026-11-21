@@ -1,99 +1,296 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diccionario y Práctica Kunza - Lickan Antai</title>
-    <!-- Enlace al archivo CSS externo -->
+    <meta name="description" content="Diccionario interactivo, tarjetas de estudio, quiz y traductor de la lengua Kunza (Lickan Antai).">
+    <title>Diccionario y Práctica Kunza — Lickan Antai</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-    <header>
-        <h1>Diccionario y Práctica Kunza</h1>
-        <p>Plataforma interactiva de rescate de la lengua Lickan Antai</p>
-    </header>
-
-    <div class="container">
-        <div class="nav-tabs">
-            <button class="nav-btn active" onclick="switchTab('dict')">Diccionario</button>
-            <button class="nav-btn" onclick="switchTab('practice')">Práctica por Temática</button>
-            <button class="nav-btn" onclick="switchTab('translator')">Traductor Interactivo</button>
-            <button class="nav-btn" onclick="switchTab('about')">Acerca de</button>
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="brand">
+                <h1>Kunza <span class="brand-sub">Lickan Antai</span></h1>
+                <p>Diccionario y plataforma interactiva de aprendizaje</p>
+            </div>
+            <button id="themeToggle" class="icon-btn" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema">
+                <span id="themeIcon">🌙</span>
+            </button>
         </div>
 
-        <!-- SECCIÓN DICCIONARIO -->
-        <div id="dict" class="section-card active">
-            <h2>Repertorio Léxico Bidireccional</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Busca por términos en kunza o español.</p>
-            
-            <input type="text" id="searchInput" class="search-input" placeholder="Escribe una palabra a buscar..." onkeyup="filterVocabulary()">
-            
-            <div class="category-filters">
-                <button class="filter-chip active" onclick="filterByCategory('all')">Todos</button>
-                <button class="filter-chip" onclick="filterByCategory('animales')">Animales</button>
-                <button class="filter-chip" onclick="filterByCategory('cuerpo')">Cuerpo</button>
-                <button class="filter-chip" onclick="filterByCategory('verbos')">Verbos</button>
-                <button class="filter-chip" onclick="filterByCategory('lugares')">Lugares</button>
-                <button class="filter-chip" onclick="filterByCategory('colores')">Colores</button>
-                <button class="filter-chip" onclick="filterByCategory('cosmovision')">Cosmovisión</button>
+        <nav class="desktop-nav" aria-label="Navegación principal">
+            <button class="nav-tab active" data-tab="dict">📖 Diccionario</button>
+            <button class="nav-tab" data-tab="practice">🎯 Practicar</button>
+            <button class="nav-tab" data-tab="translator">✍️ Traductor</button>
+            <button class="nav-tab" data-tab="favorites">⭐ Favoritos <span id="favBadgeDesktop" class="badge">0</span></button>
+        </nav>
+    </header>
+
+    <main class="app-main">
+
+        <!-- SECCIÓN 1: DICCIONARIO -->
+        <section id="tab-dict" class="tab-panel active">
+            <!-- Palabra del día -->
+            <div class="wod-card" id="wodCard">
+                <div class="wod-header">
+                    <span class="wod-label">✨ Palabra del día</span>
+                    <div class="wod-actions">
+                        <span class="cat-pill" id="wodCat">...</span>
+                        <button class="fav-btn" id="wodFavBtn" aria-label="Guardar en favoritos" title="Guardar en favoritos">☆</button>
+                    </div>
+                </div>
+                <div class="wod-body">
+                    <h2 id="wodKunza">Cargando...</h2>
+                    <p id="wodEsp"></p>
+                </div>
+            </div>
+
+            <!-- Buscador y Filtros -->
+            <div class="search-bar-wrap">
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input type="search" id="searchInput" class="search-input" placeholder="Buscar en kunza o español (ej. agua, purí, zorro)..." autocomplete="off">
+                <button id="clearSearchBtn" class="clear-input-btn" aria-label="Limpiar búsqueda" hidden>✕</button>
+            </div>
+
+            <div class="chips-scroll" id="dictCategoryChips" role="tablist" aria-label="Filtrar por categoría">
+                <button class="chip active" data-cat="all">Todos</button>
+                <button class="chip" data-cat="animales">Animales</button>
+                <button class="chip" data-cat="cuerpo">Cuerpo</button>
+                <button class="chip" data-cat="verbos">Verbos</button>
+                <button class="chip" data-cat="lugares">Lugares</button>
+                <button class="chip" data-cat="colores">Colores</button>
+                <button class="chip" data-cat="cosmovision">Cosmovisión</button>
+                <button class="chip" data-cat="otros">Otros</button>
+            </div>
+
+            <div class="results-meta">
+                <span id="resultsCount">Cargando vocabulario...</span>
             </div>
 
             <div id="vocabGrid" class="vocab-grid"></div>
-        </div>
 
-        <!-- SECCIÓN PRÁCTICA POR TEMÁTICA -->
-        <div id="practice" class="section-card">
-            <h2>Práctica Interactiva Dinámica</h2>
-            <p style="color: var(--text-secondary);">Selecciona una categoría para generar ejercicios automáticos basados en el diccionario:</p>
-            
-            <div class="category-filters" style="margin-bottom: 1.5rem;">
-                <button class="filter-chip active" onclick="startQuiz('all')">Aleatorio General</button>
-                <button class="filter-chip" onclick="startQuiz('animales')">Animales</button>
-                <button class="filter-chip" onclick="startQuiz('verbos')">Verbos</button>
-                <button class="filter-chip" onclick="startQuiz('lugares')">Lugares</button>
-                <button class="filter-chip" onclick="startQuiz('cuerpo')">Cuerpo Humano</button>
+            <div class="load-more-wrap" id="loadMoreWrap" hidden>
+                <button id="loadMoreBtn" class="btn btn-secondary">Cargar más palabras</button>
             </div>
+        </section>
 
-            <div id="quizArea" style="background: var(--highlight-bg); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
-                <h3 id="quizQuestion" style="margin-top: 0;">Selecciona una categoría arriba para comenzar</h3>
-                <div id="quizOptions" style="display: grid; gap: 0.5rem; margin-top: 1rem;"></div>
-                <p id="quizFeedback" style="font-weight: 600; margin-top: 1rem;"></p>
-                <button id="nextQuizBtn" class="nav-btn active" style="display: none; margin-top: 1rem;" onclick="nextDynamicQuiz()">Siguiente Pregunta</button>
-            </div>
-        </div>
-
-        <!-- SECCIÓN TRADUCTOR INTERACTIVO -->
-        <div id="translator" class="section-card">
-            <h2>Traductor de Términos y Oraciones</h2>
-            <p style="color: var(--text-secondary);">Escribe una oración en español. Las palabras encontradas se traducirán a kunza y las que no (como nombres propios) se mantendrán:</p>
-            
-            <div class="translator-box">
-                <div class="translator-pane">
-                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Oración en Español:</label>
-                    <textarea id="translateInput" placeholder="Ej: hola mi nombre es gonzalo lemus y tengo un zorro en mi rancho..."></textarea>
-                    
-                    <button class="nav-btn active" style="margin-top: 1rem; width: 100%; text-align: center;" onclick="translateSentence()">Traducir Oración</button>
+        <!-- SECCIÓN 2: PRACTICAR -->
+        <section id="tab-practice" class="tab-panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Zona de Práctica</h2>
+                    <p class="muted">Refuerza tu vocabulario con tarjetas 3D o rondas de quiz bidireccional.</p>
                 </div>
-                <div class="translator-pane">
-                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Traducción Aproximada (Kunza / Base de Datos):</label>
-                    <div id="translateOutput" class="output-box" style="font-weight: 500;">La traducción aparecerá aquí...</div>
+                <div class="streak-pill" title="Mejor racha guardada">
+                    🔥 Mejor racha: <strong id="bestStreakDisplay">0</strong>
                 </div>
             </div>
-        </div>
 
-        <!-- SECCIÓN ACERCA DE -->
-        <div id="about" class="section-card">
-            <h2>Patrimonio y Comunidad</h2>
-            <p>Plataforma educativa basada en el registro de la lengua <em>lickan antai</em> recopilada por Julio Vilte Vilte[cite: 3]. Diseñado con total respeto por los pueblos originarios y con vocación de libre acceso territorial.</p>
-        </div>
-    </div>
+            <!-- Selector de modo -->
+            <div class="mode-switch">
+                <button class="mode-btn active" data-mode="quiz">📝 Quiz (10 preguntas)</button>
+                <button class="mode-btn" data-mode="flashcards">🃏 Flashcards 3D</button>
+            </div>
 
-    <footer>
-        <p>Observatorio y Rescate Lingüístico Atacameño — Acceso Libre y Educativo.</p>
+            <!-- Selector de temática -->
+            <div class="chips-scroll" id="practiceCategoryChips">
+                <button class="chip active" data-cat="all">Todas</button>
+                <button class="chip" data-cat="favorites">⭐ Mis Favoritos</button>
+                <button class="chip" data-cat="animales">Animales</button>
+                <button class="chip" data-cat="cuerpo">Cuerpo</button>
+                <button class="chip" data-cat="verbos">Verbos</button>
+                <button class="chip" data-cat="lugares">Lugares</button>
+                <button class="chip" data-cat="colores">Colores</button>
+                <button class="chip" data-cat="cosmovision">Cosmovisión</button>
+                <button class="chip" data-cat="otros">Otros</button>
+            </div>
+
+            <!-- MODO QUIZ -->
+            <div id="quizContainer" class="practice-box">
+                <div class="quiz-top-bar">
+                    <span id="quizProgressText">Pregunta 1 de 10</span>
+                    <span>Racha actual: <strong id="quizStreak">0</strong> 🔥</span>
+                </div>
+                <div class="progress-track">
+                    <div id="quizProgressBar" class="progress-fill" style="width: 10%;"></div>
+                </div>
+
+                <div id="quizActiveView">
+                    <div class="quiz-tags">
+                        <span id="quizDirectionTag" class="dir-tag">Kunza → Español</span>
+                        <span id="quizHintTag" class="hint-tag">🏷️ Pista: Categoría</span>
+                    </div>
+                    <h3 id="quizPrompt" class="quiz-prompt">...</h3>
+                    <div id="quizOptions" class="quiz-options"></div>
+                    <div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>
+                    <div class="quiz-footer-actions">
+                        <button id="nextQuizBtn" class="btn btn-primary" hidden>Siguiente pregunta →</button>
+                    </div>
+                </div>
+
+                <div id="quizSummaryView" class="quiz-summary" hidden>
+                    <div class="summary-emoji" id="summaryEmoji">🎉</div>
+                    <h3>¡Ronda completada!</h3>
+                    <p class="summary-score">Obtuviste <strong id="summaryScore">0</strong> de <strong id="summaryTotal">10</strong> aciertos.</p>
+                    <button id="restartQuizBtn" class="btn btn-primary">Jugar otra ronda</button>
+                </div>
+
+                <div id="quizEmptyMsg" class="empty-state" hidden>
+                    <p>No hay suficientes palabras en esta categoría (se necesitan al menos 4) para iniciar el quiz.</p>
+                </div>
+            </div>
+
+            <!-- MODO FLASHCARDS -->
+            <div id="flashcardsContainer" class="practice-box" hidden>
+                <div class="flashcard-meta">
+                    <span id="fcCounter">Tarjeta 1 de 1</span>
+                    <span class="cat-pill" id="fcCategory">Categoría</span>
+                </div>
+
+                <div id="flashcardStage" class="flashcard-stage">
+                    <div class="flashcard" id="flashcardEl" tabindex="0" role="button" aria-label="Tocar para girar la tarjeta">
+                        <div class="flashcard-face flashcard-front">
+                            <span class="fc-side-label">Kunza</span>
+                            <h3 id="fcFrontText">...</h3>
+                            <span class="fc-tap-hint">Toca para ver el significado</span>
+                        </div>
+                        <div class="flashcard-face flashcard-back">
+                            <span class="fc-side-label">Español</span>
+                            <h3 id="fcBackText">...</h3>
+                            <span class="fc-tap-hint">Toca para volver</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard-controls">
+                    <button id="fcReviewBtn" class="btn btn-secondary">🔄 Repasar luego</button>
+                    <button id="fcKnowBtn" class="btn btn-success">✓ Ya la sé</button>
+                </div>
+
+                <div id="fcEmptyMsg" class="empty-state" hidden>
+                    <p>No hay palabras disponibles en esta selección.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: TRADUCTOR -->
+        <section id="tab-translator" class="tab-panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Traductor de Oraciones</h2>
+                    <p class="muted">Traducción aproximada palabra por palabra. Los nombres propios y términos no registrados se mantienen intactos.</p>
+                </div>
+            </div>
+
+            <div class="translator-toolbar">
+                <span id="transDirLabel" class="dir-pill">Español → Kunza</span>
+                <button id="swapDirBtn" class="btn btn-secondary btn-sm">⇄ Invertir dirección</button>
+                <button id="exampleBtn" class="btn btn-ghost btn-sm">✨ Usar ejemplo</button>
+            </div>
+
+            <div class="translator-grid">
+                <div class="translator-pane">
+                    <label for="translateInput" id="transInputLabel">Texto en Español:</label>
+                    <textarea id="translateInput" rows="5" placeholder="Escribe una oración aquí..."></textarea>
+                    <div class="pane-actions">
+                        <button id="translateBtn" class="btn btn-primary">Traducir</button>
+                        <button id="clearTransBtn" class="btn btn-ghost">Limpiar</button>
+                    </div>
+                </div>
+
+                <div class="translator-pane">
+                    <label id="transOutputLabel">Resultado en Kunza:</label>
+                    <div id="translateOutput" class="translator-output" aria-live="polite">
+                        <span class="muted">La traducción aparecerá aquí...</span>
+                    </div>
+                    <div class="pane-actions">
+                        <button id="copyTransBtn" class="btn btn-secondary">📋 Copiar resultado</button>
+                        <span id="copyFeedback" class="copy-feedback" aria-live="polite"></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="translator-note">
+                <strong>Nota:</strong> Las palabras destacadas en color terracota fueron encontradas en el diccionario (pasa el cursor o tócalas para ver su entrada exacta). El kunza posee estructuras gramaticales propias; esta herramienta ofrece una aproximación léxica educativa.
+            </p>
+        </section>
+
+        <!-- SECCIÓN 4: FAVORITOS -->
+        <section id="tab-favorites" class="tab-panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Mis Palabras Favoritas</h2>
+                    <p class="muted">Guardadas localmente en este dispositivo para repasar cuando quieras.</p>
+                </div>
+                <button id="practiceFavsBtn" class="btn btn-primary btn-sm" hidden>🎯 Practicar favoritos</button>
+            </div>
+
+            <div id="favoritesGrid" class="vocab-grid"></div>
+            <div id="favoritesEmpty" class="empty-state" hidden>
+                <p>Aún no has guardado palabras favoritas. Toca la estrella ☆ en cualquier tarjeta del diccionario para agregarla aquí.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="app-footer">
+        <p>Basado en el registro léxico de la lengua <em>Lickan Antai</em> recopilado por Julio Vilte Vilte.</p>
+        <p class="muted">Plataforma educativa de libre acceso y difusión patrimonial.</p>
     </footer>
 
-    <!-- ORDEN DE SCRIPTS: Primero los datos y luego la lógica de la aplicación -->
+    <!-- GLOBO FLOTANTE DE FEEDBACK / SUGERENCIAS -->
+    <button id="feedbackFab" class="feedback-fab" aria-label="Abrir buzón de sugerencias y feedback" title="Sugerencias e ideas">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+    </button>
+
+    <aside id="feedbackWidget" class="feedback-widget" aria-label="Chat de sugerencias y feedback" hidden>
+        <div class="fb-header">
+            <div>
+                <h3>💬 Sugerencias e Ideas</h3>
+                <p>Ayúdanos a mejorar la plataforma</p>
+            </div>
+            <button id="closeFeedbackBtn" class="fb-close-btn" aria-label="Cerrar chat">✕</button>
+        </div>
+
+        <div id="fbMessages" class="fb-messages" aria-live="polite"></div>
+
+        <div class="fb-type-bar" id="fbTypeBar">
+            <button type="button" class="fb-type-chip active" data-type="💡 Nueva idea">💡 Idea</button>
+            <button type="button" class="fb-type-chip" data-type="🛠️ Corrección">🛠️ Corrección</button>
+            <button type="button" class="fb-type-chip" data-type="💬 Sugerencia">💬 Sugerencia</button>
+        </div>
+
+        <form id="fbForm" class="fb-form">
+            <textarea id="fbInput" rows="2" placeholder="Escribe tu sugerencia, corrección o propuesta..." required></textarea>
+            <button type="submit" class="btn btn-primary btn-sm" aria-label="Enviar mensaje">Enviar</button>
+        </form>
+    </aside>
+
+    <!-- NAVEGACIÓN INFERIOR PARA MÓVILES -->
+    <nav class="mobile-nav" aria-label="Navegación móvil">
+        <button class="mobile-nav-btn active" data-tab="dict">
+            <span class="m-icon">📖</span>
+            <span>Diccionario</span>
+        </button>
+        <button class="mobile-nav-btn" data-tab="practice">
+            <span class="m-icon">🎯</span>
+            <span>Practicar</span>
+        </button>
+        <button class="mobile-nav-btn" data-tab="translator">
+            <span class="m-icon">✍️</span>
+            <span>Traductor</span>
+        </button>
+        <button class="mobile-nav-btn" data-tab="favorites">
+            <span class="m-icon">⭐</span>
+            <span>Favoritos</span>
+        </button>
+    </nav>
+
+    <!-- Datos primero, lógica después -->
     <script src="./vocabulary.js"></script>
     <script src="./app.js"></script>
 </body>
