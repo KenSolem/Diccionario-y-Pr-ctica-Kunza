@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Diccionario interactivo, tarjetas de estudio, quiz y traductor de la lengua Kunza (Lickan Antai).">
+    <meta name="description" content="Diccionario interactivo, tarjetas de estudio, quiz, traductor y juegos de la lengua Kunza (Lickan Antai).">
     <title>Diccionario y Práctica Kunza — Lickan Antai</title>
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -24,6 +24,7 @@
             <button class="nav-tab active" data-tab="dict">📖 Diccionario</button>
             <button class="nav-tab" data-tab="practice">🎯 Practicar</button>
             <button class="nav-tab" data-tab="translator">✍️ Traductor</button>
+            <button class="nav-tab" data-tab="games">🎮 Juegos</button>
             <button class="nav-tab" data-tab="favorites">⭐ Favoritos <span id="favBadgeDesktop" class="badge">0</span></button>
         </nav>
     </header>
@@ -217,7 +218,116 @@
             </p>
         </section>
 
-        <!-- SECCIÓN 4: FAVORITOS -->
+        <!-- SECCIÓN 4: JUEGOS DIDÁCTICOS -->
+        <section id="tab-games" class="tab-panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Juegos Kunza <span class="badge">Demo</span></h2>
+                    <p class="muted">Aprende jugando según nivel y edad recomendada. Base preparada para sumar ilustraciones.</p>
+                </div>
+            </div>
+
+            <div class="game-selector" id="gameSelector">
+                <button class="game-tab-btn active" data-game="memory">
+                    <span class="g-title">🃏 Memorice</span>
+                    <span class="g-age">Nivel 1 · 4–7 años</span>
+                </button>
+                <button class="game-tab-btn" data-game="wordsearch">
+                    <span class="g-title">🔎 Sopa de Letras</span>
+                    <span class="g-age">Nivel 2 · 8–12 años</span>
+                </button>
+                <button class="game-tab-btn" data-game="wordle">
+                    <span class="g-title">🧩 Wordle Kunza</span>
+                    <span class="g-age">Nivel 3 · 13+ años</span>
+                </button>
+            </div>
+
+            <!-- JUEGO 1: MEMORICE -->
+            <div id="game-memory" class="game-panel active">
+                <div class="practice-box">
+                    <div class="game-controls-row">
+                        <div class="chips-scroll" id="memCategoryChips" style="margin-bottom:0;">
+                            <button class="chip active" data-cat="all">🎲 Mezclado</button>
+                            <button class="chip" data-cat="colores">🎨 Colores</button>
+                            <button class="chip" data-cat="animales">🦊 Animales</button>
+                            <button class="chip" data-cat="cuerpo">🖐️ Cuerpo</button>
+                            <button class="chip" data-cat="cosmovision">☀️ Cosmovisión</button>
+                        </div>
+                        <div class="game-right-tools">
+                            <select id="memSizeSelect" class="game-select" aria-label="Cantidad de parejas">
+                                <option value="4">4 parejas (8 cartas)</option>
+                                <option value="6" selected>6 parejas (12 cartas)</option>
+                            </select>
+                            <button id="memRestartBtn" class="btn btn-secondary btn-sm">🔄 Reiniciar</button>
+                        </div>
+                    </div>
+
+                    <div class="game-stats-bar">
+                        <span>Movimientos: <strong id="memMoves">0</strong></span>
+                        <span>Parejas: <strong id="memMatches">0</strong> / <strong id="memTotal">6</strong></span>
+                    </div>
+
+                    <div id="memBoard" class="mem-board"></div>
+
+                    <div id="memWinBanner" class="game-win-banner" hidden>
+                        <h3>🎉 ¡Excelente memoria!</h3>
+                        <p id="memWinText"></p>
+                        <button id="memPlayAgainBtn" class="btn btn-primary btn-sm">Jugar otra vez</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JUEGO 2: SOPA DE LETRAS -->
+            <div id="game-wordsearch" class="game-panel" hidden>
+                <div class="practice-box">
+                    <div class="game-controls-row">
+                        <p class="muted">Encuentra las palabras en <strong>Kunza</strong> usando las pistas en español. Arrastra o toca inicio y fin.</p>
+                        <div class="game-right-tools">
+                            <button id="wsHintBtn" class="btn btn-secondary btn-sm">💡 Pista</button>
+                            <button id="wsRestartBtn" class="btn btn-primary btn-sm">🔄 Nueva sopa</button>
+                        </div>
+                    </div>
+
+                    <div class="ws-layout">
+                        <div id="wsGrid" class="ws-grid" aria-label="Tablero de sopa de letras"></div>
+                        <div class="ws-sidebar">
+                            <h4>Pistas en Español (<span id="wsFoundCount">0</span>/<span id="wsTotalCount">6</span>)</h4>
+                            <ul id="wsClueList" class="ws-clue-list"></ul>
+                        </div>
+                    </div>
+
+                    <div id="wsWinBanner" class="game-win-banner" hidden>
+                        <h3>🏆 ¡Completaste la Sopa de Letras!</h3>
+                        <p>Encontraste todas las palabras en kunza ocultas en el tablero.</p>
+                        <button id="wsPlayAgainBtn" class="btn btn-primary btn-sm">Generar otra sopa</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JUEGO 3: WORDLE KUNZA -->
+            <div id="game-wordle" class="game-panel" hidden>
+                <div class="practice-box">
+                    <div class="game-controls-row">
+                        <div class="quiz-tags" style="margin-bottom:0;">
+                            <span class="dir-tag">Palabra de 5 letras</span>
+                            <span id="wdCatTag" class="hint-tag">🏷️ Categoría</span>
+                        </div>
+                        <div class="game-right-tools">
+                            <button id="wdHintBtn" class="btn btn-secondary btn-sm">💡 Ver significado</button>
+                            <button id="wdRestartBtn" class="btn btn-primary btn-sm">🔄 Nueva palabra</button>
+                        </div>
+                    </div>
+
+                    <p id="wdHintText" class="wd-hint-text" hidden></p>
+
+                    <div id="wdBoard" class="wd-board" aria-label="Tablero Wordle Kunza"></div>
+                    <div id="wdStatus" class="wd-status" aria-live="polite"></div>
+                    <div id="wdKeyboard" class="wd-keyboard"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: FAVORITOS -->
         <section id="tab-favorites" class="tab-panel">
             <div class="panel-header">
                 <div>
@@ -284,14 +394,19 @@
             <span class="m-icon">✍️</span>
             <span>Traductor</span>
         </button>
+        <button class="mobile-nav-btn" data-tab="games">
+            <span class="m-icon">🎮</span>
+            <span>Juegos</span>
+        </button>
         <button class="mobile-nav-btn" data-tab="favorites">
             <span class="m-icon">⭐</span>
             <span>Favoritos</span>
         </button>
     </nav>
 
-    <!-- Datos primero, lógica después -->
+    <!-- Datos primero, lógica principal y módulo de juegos después -->
     <script src="./vocabulary.js"></script>
     <script src="./app.js"></script>
+    <script src="./games.js"></script>
 </body>
 </html>
